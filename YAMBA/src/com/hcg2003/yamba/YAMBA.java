@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +21,7 @@ public class YAMBA extends Activity
 	EditText etTweet;
 	Button btnUpadte;
 	Twitter twitter;
+	ProgressDialog pd;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -76,9 +78,17 @@ public class YAMBA extends Activity
 		}	
 		
 		@Override
+		protected void onPreExecute()
+		{
+			pd = ProgressDialog.show(YAMBA.this, "處理中...", "請稍候，處理完畢會自動結束...");
+			super.onPreExecute();
+		}
+		
+		@Override
 		protected void onPostExecute(String result)
 		{
 			Toast.makeText(YAMBA.this, result, Toast.LENGTH_SHORT).show();
+			pd.dismiss();
 //			super.onPostExecute(result);
 		}
 		
