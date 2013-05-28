@@ -54,7 +54,7 @@ public class YAMBA extends Activity
 			public void onClick(View v)
 			{
 //				twitter.setStatus(etTweet.getText().toString());
-				new PostToTwitter().doInBackground(etTweet.getText().toString());
+				new PostToTwitter().execute(etTweet.getText().toString());
 				Log.d(TAG, "onClicked");
 			}
 		});
