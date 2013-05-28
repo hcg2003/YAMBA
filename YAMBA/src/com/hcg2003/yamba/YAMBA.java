@@ -1,6 +1,8 @@
 package com.hcg2003.yamba;
 
 import winterwell.jtwitter.Twitter;
+import winterwell.jtwitter.TwitterException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class YAMBA extends Activity
 {
@@ -50,13 +53,37 @@ public class YAMBA extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				twitter.setStatus(etTweet.getText().toString());
+//				twitter.setStatus(etTweet.getText().toString());
+				new PostToTwitter().doInBackground(etTweet.getText().toString());
 				Log.d(TAG, "onClicked");
 			}
 		});
 	}
 
 
+	class PostToTwitter extends AsyncTask<String, Integer, String>{
+
+		@Override
+		protected String doInBackground(String... params)
+		{
+			try
+			{
+				return twitter.setStatus(params[0]).text;
+			}catch(TwitterException te)
+			{
+				return "Failed to post";
+			}
+		}	
+		
+		@Override
+		protected void onPostExecute(String result)
+		{
+			Toast.makeText(YAMBA.this, result, Toast.LENGTH_SHORT).show();
+//			super.onPostExecute(result);
+		}
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
