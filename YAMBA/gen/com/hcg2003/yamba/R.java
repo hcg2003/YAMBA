@@ -43,14 +43,16 @@ public final class R {
         public static final int btnUpdate=0x7f060005;
         public static final int hello_world=0x7f060002;
         public static final int hintText=0x7f060004;
-        public static final int summaryApiRoot=0x7f06000b;
-        public static final int summaryPassword=0x7f060009;
-        public static final int summaryUsername=0x7f060007;
-        public static final int titleApiRoot=0x7f06000a;
-        public static final int titlePassword=0x7f060008;
-        public static final int titlePrefs=0x7f06000c;
+        public static final int summaryApiRoot=0x7f06000d;
+        public static final int summaryPassword=0x7f06000b;
+        public static final int summaryProgressDialog=0x7f060007;
+        public static final int summaryUsername=0x7f060009;
+        public static final int titleApiRoot=0x7f06000c;
+        public static final int titlePassword=0x7f06000a;
+        public static final int titlePrefs=0x7f06000e;
+        public static final int titleProgressDialog=0x7f060006;
         public static final int titleStatus=0x7f060003;
-        public static final int titleUsername=0x7f060006;
+        public static final int titleUsername=0x7f060008;
     }
     public static final class style {
         /** 

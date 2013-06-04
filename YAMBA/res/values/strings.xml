@@ -8,6 +8,9 @@
     <string name="hintText">Please enter your 140-character status</string>
     <string name="btnUpdate">Update</string>
     
+    <string name="titleProgressDialog">處理中…</string>
+    <string name="summaryProgressDialog">請稍候，處理完畢會自動結束…</string>
+    
     <string name="titleUsername">Username</string>
     <string name="summaryUsername">Please enter your username</string>
     <string name="titlePassword">Password</string>

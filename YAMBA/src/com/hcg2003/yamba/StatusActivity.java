@@ -1,22 +1,20 @@
 package com.hcg2003.yamba;
 
-import org.w3c.dom.Text;
 
-import winterwell.jtwitter.Twitter;
+//import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
+//import android.os.StrictMode;
+//import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+//import android.content.SharedPreferences;
+//import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,15 +24,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class YAMBA extends Activity
+public class StatusActivity extends Activity
 {
-	private static final String TAG = "StatusActivity";
+//	private static final String TAG = "StatusActivity";
 	TextView tvCount;
 	EditText etTweet;
 	Button btnUpadte;
-	Twitter twitter;
+//	Twitter twitter;
 	ProgressDialog pd;
-	SharedPreferences shPrefs;
+//	SharedPreferences shPrefs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -56,7 +54,7 @@ public class YAMBA extends Activity
 		setContentView(R.layout.activity_yamba);
 		findViews();
 		listeners();
-		getTwitter();
+//		getTwitter();
 	}
 	
 	private void findViews()
@@ -69,7 +67,7 @@ public class YAMBA extends Activity
 		etTweet = (EditText)findViewById(R.id.evTweet);
 		btnUpadte = (Button)findViewById(R.id.btnUpdate);
 		//Setup Preferences
-		shPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+//		shPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 	}
 	
 	private void listeners()
@@ -111,28 +109,28 @@ public class YAMBA extends Activity
 		});
 		
 		//SharedPreferences Listener
-		shPrefs.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener()
-		{
-			@Override
-			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-			{
-				twitter = null;			
-			}
-		});
+//		shPrefs.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener()
+//		{
+//			@Override
+//			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+//			{
+//				twitter = null;			
+//			}
+//		});
 	}
 
-	private Twitter getTwitter()
-	{
-		if(twitter == null)
-		{
-			String username= shPrefs.getString("username","");
-			String password= shPrefs.getString("password", "");
-			String apiRoot= shPrefs.getString("apiRoot", "http://yamba.marakana.com/api");
-			twitter = new Twitter(username, password);
-			twitter.setAPIRootUrl(apiRoot);			
-		}
-		return twitter;
-	}
+//	private Twitter getTwitter()
+//	{
+//		if(twitter == null)
+//		{
+//			String username= shPrefs.getString("username","");
+//			String password= shPrefs.getString("password", "");
+//			String apiRoot= shPrefs.getString("apiRoot", "http://yamba.marakana.com/api");
+//			twitter = new Twitter(username, password);
+//			twitter.setAPIRootUrl(apiRoot);			
+//		}
+//		return twitter;
+//	}
 	
 	class PostToTwitter extends AsyncTask<String, Integer, String>{
 
@@ -141,7 +139,7 @@ public class YAMBA extends Activity
 		{
 			try
 			{
-				return twitter.setStatus(params[0]).text;
+				return ((YambaApplication)getApplication()).getTwitter().setStatus(params[0]).text;
 			}catch(TwitterException te)
 			{
 				return "Failed to post";
@@ -151,14 +149,14 @@ public class YAMBA extends Activity
 		@Override
 		protected void onPreExecute()
 		{
-			pd = ProgressDialog.show(YAMBA.this, "處理中...", "請稍候，處理完畢會自動結束...");
+			pd = ProgressDialog.show(StatusActivity.this, getResources().getString(R.string.titleProgressDialog), getResources().getString(R.string.summaryProgressDialog));
 			super.onPreExecute();
 		}
 		
 		@Override
 		protected void onPostExecute(String result)
 		{
-			Toast.makeText(YAMBA.this, result, Toast.LENGTH_SHORT).show();
+			Toast.makeText(StatusActivity.this, result, Toast.LENGTH_SHORT).show();
 			pd.dismiss();
 		}
 		
