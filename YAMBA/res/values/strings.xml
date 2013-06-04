@@ -15,6 +15,6 @@
     <string name="titleApiRoot">API Root</string>
     <string name="summaryApiRoot">URL of Root API for your service</string>
     
-    <string name="titlePrefs">Perfs</string>
+    <string name="titlePrefs">Prefs</string>
  
 </resources>
