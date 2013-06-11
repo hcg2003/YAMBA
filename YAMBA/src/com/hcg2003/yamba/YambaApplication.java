@@ -11,6 +11,7 @@ public class YambaApplication extends Application
 {
 	private Twitter twitter;
 	private SharedPreferences shPrefs;
+	private boolean serviceRunning;
 	
 	@Override
 	public void onCreate()
@@ -42,5 +43,15 @@ public class YambaApplication extends Application
 		}
 			
 		return this.twitter;
+	}
+	
+	public boolean isServiceRunning()
+	{
+		return serviceRunning;
+	}
+	
+	public void setServiceRunning(boolean serviceRunning)
+	{
+		this.serviceRunning = serviceRunning;
 	}
 }
