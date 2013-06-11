@@ -27,6 +27,8 @@ public final class R {
         public static final int btnUpdate=0x7f090003;
         public static final int evTweet=0x7f090002;
         public static final int itemPrefs=0x7f090004;
+        public static final int itemServiceStart=0x7f090005;
+        public static final int itemServiceStop=0x7f090006;
         public static final int tvCount=0x7f090001;
         public static final int tvTitle=0x7f090000;
     }
@@ -51,6 +53,8 @@ public final class R {
         public static final int titlePassword=0x7f06000a;
         public static final int titlePrefs=0x7f06000e;
         public static final int titleProgressDialog=0x7f060006;
+        public static final int titleServiceStart=0x7f06000f;
+        public static final int titleServiceStop=0x7f060010;
         public static final int titleStatus=0x7f060003;
         public static final int titleUsername=0x7f060008;
     }

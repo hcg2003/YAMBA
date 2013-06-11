@@ -29,7 +29,7 @@ public class YambaApplication extends Application
 	
 	public synchronized Twitter getTwitter()
 	{
-		if(twitter == null)
+		if(this.twitter == null)
 		{
 			String username = this.shPrefs.getString("username", "");
 			String password = this.shPrefs.getString("password", "");
