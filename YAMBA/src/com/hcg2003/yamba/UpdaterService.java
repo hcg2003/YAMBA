@@ -19,8 +19,8 @@ public class UpdaterService extends Service
 	private Updater updater;
 	private YambaApplication yamba;
 	
-	DbHelper dbHelper;
-	SQLiteDatabase db;
+//	DbHelper dbHelper;
+//	SQLiteDatabase db;
 	
 	private class Updater extends Thread
 	{
@@ -46,26 +46,26 @@ public class UpdaterService extends Service
 						e.printStackTrace();
 					}
 					
-					//Open db
-					db = dbHelper.getWritableDatabase();
-					
-					//Lopp over the timeline
-					ContentValues cv = new ContentValues();
-					for(Twitter.Status status: timeline)
-					{
-						cv.clear();
-						cv.put(DbHelper.C_ID, status.id);
-						cv.put(DbHelper.C_CREATED_AT, status.createdAt.getTime());
-						cv.put(DbHelper.C_SOURCE, status.source);
-						cv.put(DbHelper.C_USER, status.user.name);
-						cv.put(DbHelper.C_TEXT, status.text);
-						db.insertOrThrow(DbHelper.TABLE, null, cv);
-			
-						Log.d("UpdaterService", String.format("%s: %s", status.user.name, status.text));			
-					}
-					
-					//Close db
-					db.close();
+//					//Open db
+//					db = dbHelper.getWritableDatabase();
+//					
+//					//Lopp over the timeline
+//					ContentValues cv = new ContentValues();
+//					for(Twitter.Status status: timeline)
+//					{
+//						cv.clear();
+//						cv.put(DbHelper.C_ID, status.id);
+//						cv.put(DbHelper.C_CREATED_AT, status.createdAt.getTime());
+//						cv.put(DbHelper.C_USER, status.user.name);
+//						cv.put(DbHelper.C_TEXT, status.text);
+//
+//						db.insertOrThrow(DbHelper.TABLE, null, cv);
+//
+//						Log.d("UpdaterService", String.format("%s: %s", status.user.name, status.text));			
+//					}
+//					
+//					//Close db
+//					db.close();
 					
 					Log.d("UpdaterService", "Updater ran");
 					Thread.sleep(DELAY);
@@ -93,7 +93,7 @@ public class UpdaterService extends Service
 		this.updater = new Updater();
 		this.yamba = (YambaApplication) getApplication();
 		
-		dbHelper = new DbHelper(this);
+//		dbHelper = new DbHelper(this);
 	}
 
 	@Override
