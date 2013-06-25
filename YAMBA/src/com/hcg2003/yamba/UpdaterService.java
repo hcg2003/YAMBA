@@ -6,21 +6,17 @@ import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 
 import android.app.Service;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.util.Log;
 
 public class UpdaterService extends Service
 {
+	public static final String TAG = UpdaterService.class.getSimpleName();
 	static final int DELAY = 60000; // 1 min
 	private boolean runFlag = false;
 	private Updater updater;
 	private YambaApplication yamba;
-	
-//	DbHelper dbHelper;
-//	SQLiteDatabase db;
 	
 	private class Updater extends Thread
 	{
@@ -36,38 +32,16 @@ public class UpdaterService extends Service
 			UpdaterService updaterService = UpdaterService.this;
 			while(updaterService.runFlag)
 			{
+				Log.d(TAG, "Running background thread");
 				try
 				{
-					try
+					YambaApplication yamba = (YambaApplication) updaterService.getApplication();
+					int newUpdates = yamba.fetchStatusUpdates();
+					if(newUpdates > 0)
 					{
-						timeline = yamba.getTwitter().getFriendsTimeline();
-					} catch (TwitterException e)
-					{
-						e.printStackTrace();
+						Log.d(TAG, "We have a new status");
 					}
-					
-//					//Open db
-//					db = dbHelper.getWritableDatabase();
-//					
-//					//Lopp over the timeline
-//					ContentValues cv = new ContentValues();
-//					for(Twitter.Status status: timeline)
-//					{
-//						cv.clear();
-//						cv.put(DbHelper.C_ID, status.id);
-//						cv.put(DbHelper.C_CREATED_AT, status.createdAt.getTime());
-//						cv.put(DbHelper.C_USER, status.user.name);
-//						cv.put(DbHelper.C_TEXT, status.text);
-//
-//						db.insertOrThrow(DbHelper.TABLE, null, cv);
-//
-//						Log.d("UpdaterService", String.format("%s: %s", status.user.name, status.text));			
-//					}
-//					
-//					//Close db
-//					db.close();
-					
-					Log.d("UpdaterService", "Updater ran");
+
 					Thread.sleep(DELAY);
 					
 				} catch (InterruptedException e)
